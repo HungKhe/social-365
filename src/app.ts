@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import  Routes  from './routes/routes';
+import Routes from './routes/routes';
 
 class App {
     public app: Application;
@@ -19,7 +19,7 @@ class App {
         this.app.use(cors());
         dotenv.config();
     }
-    private routers(): void {
+    private routers = () => {
         this.app.get("/", (req, res, next) => {
             res.send({
                 status: 'Welcome to my app'
