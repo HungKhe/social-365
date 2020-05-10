@@ -1,13 +1,14 @@
 import { Application } from 'express';
-import { userController } from '../../controller/users/userController'
+import userController from '../../controller/users/userController'
 
 export class Users {
-    public userController: userController = new userController();
-    public routes(app: Application): void{
+    // public userController: userController = new userController();
+    public routes(app: Application): void {
         app.route("/user")
-        .post(this.userController.onRegisterMember)
+        .put(userController.onRegisterMember)
+        .post(userController.onLoginMember)
 
         app.route("/user/:id")
-        .get(this.userController.onGetInforMember)
+        .get(userController.onGetInforMember);
     }
 }

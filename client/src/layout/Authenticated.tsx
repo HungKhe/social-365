@@ -1,9 +1,10 @@
 import React from 'react';
+import Loading from '../modules/Loading/container/Loading';
 
 const Authenticated: React.FC<{}> = props => {
     return (
         <div className="authenticated">
-            <h1>Layout Authenticated </h1>
+            <Loading />
             { props.children }
         </div>
     )
