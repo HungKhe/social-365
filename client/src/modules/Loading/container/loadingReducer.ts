@@ -18,8 +18,8 @@ const initialState: itfLoading = {
     isLoading: false
 }
 
-const Loading = (state = initialState, action: LoadingTypes) => {
-    return { ...state }
+const loadingReducer = (state = initialState, action: LoadingTypes) => {
+    return { ...state, isLoading: action.payload.isLoading }
 }
 
-export default Loading;
+export default loadingReducer;

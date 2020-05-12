@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
 import LoginPage from '../page/LoginPage';
+import * as actions from '../redux/actions';
 
 const Login: React.FC<{}> = props => {
-    const [isDisabledBtn, setIsDisabledBtn] = useState<boolean>(false);
+    const dispatch = useDispatch()
     const handleSubmit = (data: any) => {
         console.log('data: ', data)
-        setIsDisabledBtn(true);
+        dispatch(actions.actUserLogin(data));
     }
     return(
-        <LoginPage prHandleSubmit={ handleSubmit } isDisabledBtn={ isDisabledBtn }/>
+        <LoginPage prHandleSubmit={ handleSubmit } />
     )
 }
 export default Login;
