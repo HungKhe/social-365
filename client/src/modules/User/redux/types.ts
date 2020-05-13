@@ -34,14 +34,15 @@ export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
 export const USER_REGISTER_FAILED = "USER_REGISTER_FAILED";
 
 export interface userRegister {
-    userName: string,
     userEmail: string,
+    userName: string,
     userPassword: string
 }
 
 export interface userRegisterState {
     error: boolean,
-    status: string
+    status: string,
+    isSuccess: boolean
 }
 
 interface typeUserRegister {

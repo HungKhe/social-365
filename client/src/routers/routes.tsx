@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from '../modules/User/Login/container/Login';
 import Register from '../modules/User/Register/container/Register';
-import Community from '../modules/Community/page/Community';
+import Community from '../modules/Community/container/Community';
 const routes = [
     {
         path: "/",

@@ -49,11 +49,11 @@ class userController {
                     status: "Đăng ký thất bại, vui lòng thử lại sau!!!"
                 });
             } else {
-                let docUser = user._doc;
-                delete docUser._id;
-                delete docUser.user_password;
+                // let docUser = user._doc;
+                // delete docUser._id;
+                // delete docUser.user_password;
                 // const dataResponse = await this.onRenderUserResponse(user);
-                const resData = { error: false, status: "Đăng ký thành công!!!", user: docUser}
+                const resData = { error: false, status: "Đăng ký thành công!!!"}
                 return res.status(200).json(resData);
             }
         });

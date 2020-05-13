@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EffectButton from '../../../../components/snippets/EffectButton';
+import { toastShowMessage } from '../../../../utils/toastify';
 interface RegisterPage {
-    isDisabledBtn: boolean,
+    isDisabledBtn?: boolean,
     prHandleSubmit: (data?: any) => void;
 }
+interface dataForm {
+    userEmail: string,
+    userName: string,
+    userPassword: string,
+    userPasswordConfirm: string
+}
 const RegisterPage: React.FC<RegisterPage> = props => {
-    const { isDisabledBtn, prHandleSubmit } = props;
-    const [dataform, setDataForm] = useState<object>({
+    const { prHandleSubmit } = props;
+    const [dataForm, setDataForm] = useState<dataForm>({
         userEmail: '',
         userName: '',
         userPassword: '',
@@ -15,11 +22,27 @@ const RegisterPage: React.FC<RegisterPage> = props => {
     });
     const inputHandleChange = function(e: React.ChangeEvent<HTMLInputElement>){
         const { value, name } = e.target;
-        setDataForm({ ...dataform, [name]: escape(value)});
+        setDataForm({ ...dataForm, [name]: escape(value)});
     }
     const handleSubmit = function(e: React.FormEvent){
         e.preventDefault();
-        prHandleSubmit(dataform);
+        if(dataForm.userEmail === '' || dataForm.userName === '' 
+        || dataForm.userPassword === '' || dataForm.userPasswordConfirm === ''){
+            toastShowMessage('warn','Vui lòng điền đầy đủ thông tin!!!');
+            return false;
+        }
+        if(dataForm.userPassword !== dataForm.userPasswordConfirm){
+            toastShowMessage('warn','Nhập lại mật khẩu chưa chính xác!!!');
+            return false;
+        }
+        const regName = new RegExp(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi);
+        if(regName.test(dataForm.userName.toLowerCase())){
+            toastShowMessage('warn','Tài khoản không được chứa các ký tự đặc biệt!!!');
+            return false;
+        }
+        const data = { ...dataForm };
+        delete data.userPasswordConfirm;
+        prHandleSubmit(data);
     }
     return (
         <div className="registerPage authPage">
@@ -69,7 +92,7 @@ const RegisterPage: React.FC<RegisterPage> = props => {
                             </div>
                         </div>
                         <div className="floating-label send">
-                            <EffectButton disabled={isDisabledBtn} nameButton="Đăng ký"/>
+                            <EffectButton nameButton="Đăng ký"/>
                         </div>
                         <div className="floating-label text">
                             <span>Bạn đã có tài khoản? <Link to="/">Đăng nhập ngay</Link></span>

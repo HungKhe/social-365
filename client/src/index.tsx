@@ -6,6 +6,7 @@ import App from './modules/App';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store';
 const store = configureStore();
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
     <Provider store={ store }>

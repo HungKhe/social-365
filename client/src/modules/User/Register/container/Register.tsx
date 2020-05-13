@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { useDispatch, useStore, useSelector } from 'react-redux';
 import RegisterPage from '../page/RegisterPage';
 import { toastShowMessage } from '../../../../utils/toastify';
-
-const Register: React.FC<{}> = props => {
-    const [isDisabledBtn, setIsDisabledBtn] = useState<boolean>(false);
-    const handleSubmit = (dataform: any) => {
-        console.log('data: ', dataform)
-        if(dataform.userEmail === '' || dataform.userName === '' 
-        || dataform.userPassword === '' || dataform.userPasswordConfirm === ''){
-            toastShowMessage('warn','Vui lòng điền đầy đủ thông tin!!!');
-            return false;
-        }
-        if(dataform.userPassword !== dataform.userPasswordConfirm){
-            toastShowMessage('warn','Nhập lại mật khẩu chưa chính xác!!!');
-            return false;
-        }
-        const regName = new RegExp(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi);
-        if(regName.test(dataform.userName.toLowerCase())){
-            toastShowMessage('warn','Tài khoản không được chứa các ký tự đặc biệt!!!');
-            return false;
-        }
-        setIsDisabledBtn(true);
+import { TypeRootReducer } from '../../../../reducer/interfaceReducer';
+import { actUserRegister } from '../../redux/actions';
+import { userRegister } from '../../redux/types';
+interface Register {
+    history: any
+}
+const Register: React.FC<Register> = props => {
+    const { history } = props;
+    const dispatch = useDispatch();
+    const isSuccess: boolean = useSelector((state: TypeRootReducer) => state.user.register.isSuccess);
+    const handleSubmit = (dataForm: userRegister) => {
+        dispatch(actUserRegister(dataForm));
     }
+    useEffect(() => {
+        if(isSuccess)
+            setTimeout(() => {
+                history.push('/login');
+            }, 2500);
+    }, [isSuccess])
     return(
-        <RegisterPage prHandleSubmit={ handleSubmit } isDisabledBtn={ isDisabledBtn }/>
+        <RegisterPage prHandleSubmit={ handleSubmit } />
     )
 }
-export default Register;
+export default withRouter(Register);
