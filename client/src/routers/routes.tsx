@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from '../modules/Login/containers/Login';
-import Register from '../modules/Register/containers/Register';
+import Login from '../modules/User/Login/container/Login';
+import Register from '../modules/User/Register/container/Register';
 import Community from '../modules/Community/page/Community';
 const routes = [
     {

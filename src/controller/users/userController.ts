@@ -23,7 +23,7 @@ class userController {
             .post(this.onLoginMember)
 
         this.router.route("/user/:id")
-            .get(this.onGetInforMember);
+            .get(this.onGetInfoMember);
             
     }
     async onRegisterMember(req: Request, res: Response){
@@ -49,8 +49,11 @@ class userController {
                     status: "Đăng ký thất bại, vui lòng thử lại sau!!!"
                 });
             } else {
-                const dataResponse = await this.onRenderUserResponse(user);
-                const resData = { error: false, status: "Đăng ký thành công!!!", ...dataResponse}
+                let docUser = user._doc;
+                delete docUser._id;
+                delete docUser.user_password;
+                // const dataResponse = await this.onRenderUserResponse(user);
+                const resData = { error: false, status: "Đăng ký thành công!!!", user: docUser}
                 return res.status(200).json(resData);
             }
         });
@@ -65,16 +68,17 @@ class userController {
         try {
             const findUser: any = await userModel.findOne({ 'user_name': unescape(userName) }).then(r => r);
             if(!findUser)
-                return res.status(401).json({
+                return res.json({
                     error: true,
                     status: "Tài khoản đăng nhập không tồn tại!!!"
                 });
             if(!findUser.comparePassword(unescape(userPassword)))
-                return res.status(401).json({
+                return res.send({
                     error: true,
                     status: "Mật khẩu đăng nhập không hợp lệ!!!"
                 });
-            const dataResponse = await this.onRenderUserResponse(findUser);
+            let docUser = findUser._doc;
+            const dataResponse = await this.onRenderUserResponse(docUser);
             const resData = { error: false, status: "Đăng nhập thành công!!!", ...dataResponse}
             return res.status(200).json(resData);
         } catch (error) {
@@ -84,10 +88,10 @@ class userController {
             });
         }
     }
-    public onGetInforMember = (req: Request, res: Response) => {
+    public onGetInfoMember = (req: Request, res: Response) => {
         console.log("req: ", req.params)
         res.json({
-            status: 'onGetInforMember'
+            status: 'onGetInfoMember'
         });
     }
     async onRenderUserResponse(user: any){

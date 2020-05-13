@@ -9,6 +9,6 @@ export class Users {
         .post(userController.onLoginMember)
 
         app.route("/user/:id")
-        .get(userController.onGetInforMember);
+        .get(userController.onGetInfoMember);
     }
 }

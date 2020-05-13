@@ -19,7 +19,7 @@ class Routes {
             .post(userController.onLoginMember)
 
         this.router.route("/user/:id")
-            .get(userController.onGetInforMember);
+            .get(userController.onGetInfoMember);
     }
 }
 export default new Routes();
