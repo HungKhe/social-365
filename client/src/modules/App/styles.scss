@@ -1,17 +1,23 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap&subset=vietnamese");
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
 $textColor: #444;
 $mainColor: #058cf6;
 body {
-    font-size: 14px;
+    font-size: 15px;
     overflow-x: hidden;
     color: $textColor;
     margin: 0;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Dosis", sans-serif;
     background-color: #f0f2f5;
 }
 button,
 a {
     cursor: pointer;
+    color: $textColor;
+}
+a{
+    &:hover{
+        color: $mainColor;
+    }
 }
 .svg-icon {
     width: 1em;
@@ -267,6 +273,109 @@ a {
         &:disabled {
             opacity: 0.5;
             cursor: default;
+        }
+    }
+}
+// HEADER 
+.headerPage {
+    box-shadow: rgba(0, 0, 0, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 1px 1px 1px 1px;
+    background: #fff;
+    .logoImage {
+        svg {
+            width: 100%;
+        }
+    }
+    .user {
+        .svg-icon {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            color: $textColor;
+            &.countNotify {
+                position: absolute;
+                left: 7px;
+                top: -5px;
+                width: 17px;
+                height: 17px;
+                text-align: center;
+                border-radius: 50px;
+                background: #007bff;
+                color: #fff;
+                font-size: 12px;
+                line-height: 17px;
+                z-index: 1;
+            }
+        }
+        .notify {
+            margin-right: 1em;
+            position: relative;
+        }
+    }
+}
+.frmSearch{
+    .form-group {
+        margin-bottom: 0;
+        position: relative;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.125) 0px 1px 2px;
+        .form-control {
+            border: none;
+            height: 40px;
+        }
+        .btn{
+            border: none;
+            border-left: 1px solid rgb(233, 235, 238) !important;
+            border-radius: 0px 5px 5px 0px;
+            background: rgb(247, 249, 250) !important;
+            color: rgb(77, 78, 79) !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 40px;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        .svg-icon{
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            path{
+                fill:rgb(77, 78, 79);
+            }
+        }
+    }
+}
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    .nav-item{
+        margin-bottom: .5em;
+        &.active{
+             a {
+                background-color: #fff;
+                box-shadow: rgba(0, 0, 0, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 1px 1px 1px 1px;
+                font-weight: bold;
+                color: $textColor;
+            }
+        }
+        a {
+            padding: 5px;
+            text-transform: uppercase;
+            &:hover{
+                color: $textColor;
+            }
+            .svg-icon {
+                width: 25px;
+                height: 25px;
+                margin-right: 5px;
+            }            
         }
     }
 }
