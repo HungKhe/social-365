@@ -1,0 +1,63 @@
+.communityPost {
+    background: #fff;
+    position: relative;
+    .head {
+        padding: .5em 1em;
+        background: rgb(247, 249, 250);
+        .title{
+            font-size: 1.2em;
+            margin: 0;
+        }
+    }
+    .middle {
+        padding: 1em 0 .5em;
+        margin: 0 1em .5em;
+        border-bottom: 1px solid rgb(240, 242, 245);
+        .defaultAvatar {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            background: rgb(230, 230, 230);
+            line-height: 45px;
+            border-radius: 50px;
+            margin-right: 1em;
+            .svg-icon{
+                width: 1.7em;
+                height: 1.7em;
+            }
+        }
+        .textInput {
+            flex: 1;
+            .form-control {
+                border: none;
+                box-shadow: none !important;
+                outline: none !important;
+                padding: 0;
+                height: 70px;
+            }
+        }
+    }
+    .bottom {
+        padding: 0 1em 1em;
+        .list {
+            display: flex;
+            li{
+                margin-right: 1em;
+                a {
+                    display: flex;
+                    align-items: center;
+                    background: rgb(247, 249, 250);
+                    border-bottom: 1px solid rgb(233, 235, 238);
+                    border-radius: 16px;
+                    padding: 5px 1em;
+                    text-decoration: none;
+                    .svg-icon {
+                        width: 1.2em;
+                        height: 1.2em;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

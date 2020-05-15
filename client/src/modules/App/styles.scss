@@ -33,6 +33,9 @@ a{
         stroke-width: 1;
     }
 }
+.shadowPage{
+    box-shadow: rgba(0, 0, 0, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 1px 1px 1px 1px;
+}
 // Loading
 .lineLoading {
     position: fixed;
@@ -376,6 +379,25 @@ a{
                 height: 25px;
                 margin-right: 5px;
             }            
+        }
+    }
+}
+.tagsList{
+    .title {
+        font-size: 1.5em;
+    }
+    .list{
+        .nav-item{
+            display: inline-block;
+            margin-right: .5em;
+            .nav-link{
+                background-color: rgb(255, 255, 255);
+                color: rgb(77, 78, 79);
+                box-shadow: rgba(0, 0, 0, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 1px 1px 1px 1px;
+                text-transform: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+            }
         }
     }
 }

@@ -2,17 +2,35 @@ import mongoose from './index';
 const schema = {
     post_id: { type: mongoose.Types.ObjectId(), auto: true },
     content: String,
-    replyCount: Number,
-    likeCount: Number,
+    replyCount: {
+        type: Number,
+        default: 0
+    },
+    likeCount: {
+        type: Number,
+        default: 0
+    },
     user: {
         user_id: Number,
         display_name: String,
         avatar: String
     },
-    createDate: Date,
-    replies: Array,
-    images: Array,
-    videos: Array,
+    create_date: {
+        type: Date,
+        default: Date.now
+    },
+    replies:{
+        type: Array,
+        default: []
+    },
+    images: {
+        type: Array,
+        default: []
+    },
+    videos: {
+        type: Array,
+        default: []
+    },
     myPost: Boolean
 };
 const collectionName = "social_post";
