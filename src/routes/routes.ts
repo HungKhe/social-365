@@ -1,28 +1,26 @@
-import express, { Application, Router } from "express";
-import { PostSocial } from "./social/post";
-import { Users } from "./users/users";
+import express, { Request, Router } from "express";
 import userController from '../controller/users/userController';
-import isAuth from '../helper/auth/jwt.middleware';
-
+import postController from "../controller/posts/postController";
 class Routes {
     public router: Router = Router();
-    public PostSocial: PostSocial = new PostSocial();
-    public UsersRoutes: Users = new Users();
     constructor(){
         this.initRouters();
     }
     public initRouters(): void {
         this.initUserRouter();
+        this.initPostRouter();
     }
     public initUserRouter(): void {
-        this.router.use(isAuth());
-
         this.router.route("/user")
             .put(userController.onRegisterMember)
             .post(userController.onLoginMember)
         
-        this.router.route("/user/:id")
+        this.router.route("/user/me")
             .get(userController.onGetInfoMember);
+    }
+    public initPostRouter(): void {
+        this.router.route("/community/post")
+            .post(postController.onCreateNewPost)
     }
 }
 export default new Routes();

@@ -1,7 +1,10 @@
 import mongoose from './index';
 const schema = {
-    post_id: { type: mongoose.Types.ObjectId(), auto: true },
-    content: String,
+    post_id: { type: mongoose.Types.ObjectId, auto: true },
+    content: {
+        type: String,
+        required: true
+    },
     replyCount: {
         type: Number,
         default: 0
@@ -11,9 +14,8 @@ const schema = {
         default: 0
     },
     user: {
-        user_id: Number,
-        display_name: String,
-        avatar: String
+        type: Object,
+        default: {}
     },
     create_date: {
         type: Date,
@@ -31,9 +33,11 @@ const schema = {
         type: Array,
         default: []
     },
-    myPost: Boolean
+    my_post: {
+        type: Boolean
+    }
 };
-const collectionName = "social_post";
+const collectionName = "posts";
 const shopSchema = new mongoose.Schema(schema);
-const SocialPost = mongoose.model(collectionName, shopSchema);
-export default SocialPost;
+const PostsModel = mongoose.model(collectionName, shopSchema);
+export default PostsModel;

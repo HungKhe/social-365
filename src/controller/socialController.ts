@@ -1,4 +1,4 @@
-import socialModel from '../model/social';
+import socialModel from '../model/posts';
 import { Request, Response, NextFunction } from 'express';
 
 export class socialController {

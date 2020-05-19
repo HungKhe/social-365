@@ -1,18 +1,17 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { verifyToken } from './jwt.helper';
-interface RequestCustom extends Request{
-    jwtDecoded: any;
-}
+// interface RequestCustom extends Request{
+//     jwtDecoded: any;
+// }
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET || "access-token-secret-365-app";
 
-const isAuth = async (req:RequestCustom , res: Response, next: NextFunction) => {
-    let tokenFromClient: string = req.headers["x-access-token"]?.toString() || req.headers["Authorization"]?.toString() || '';
+export const isAuth = async (req:Request , res: Response) => {
+    let tokenFromClient: string = req.headers["x-access-token"]?.toString() || req.headers["authorization"]?.toString() || '';
     if (tokenFromClient) {
         if(tokenFromClient.indexOf('Bearer ') > -1)
-            tokenFromClient = tokenFromClient.replace('Bearer ','');
+            tokenFromClient = tokenFromClient.replace('Bearer ','').trim();
         const decoded = await verifyToken(tokenFromClient, accessTokenSecret);
-        req.jwtDecoded = decoded;
+        return decoded;
     }
-    next();
+    return false;
 }
-export default isAuth;

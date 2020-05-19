@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.scss';
 
-const Post: React.FC<{}> = (props) => {
+interface Post {
+    prHandlePost: (data?: any) => void;
+}
+interface postState {
+    content: string;
+    videos: File[];
+    images: File[];
+}
+const Post: React.FC<Post> = (props) => {
+    const { prHandlePost } = props;
+    const [dataPost, setDataPost] = useState<postState>({
+        content: '',
+        videos: [],
+        images: []
+    })
+    const handleChange = function(e: React.ChangeEvent<HTMLTextAreaElement>){
+        setDataPost({ ...dataPost, content: e.target.value });
+    }
+    const handlePost = function(e: React.MouseEvent<HTMLButtonElement>){
+        e.preventDefault();
+        prHandlePost(dataPost);
+    }
     return(
         <div className="communityPost">
             <div className="postWrapper shadowPage">
@@ -19,7 +40,7 @@ const Post: React.FC<{}> = (props) => {
                             </div>
                         </div>
                         <div className="textInput">
-                            <textarea className="form-control" placeholder="Nội dung chia sẻ..."></textarea>
+                            <textarea onChange={handleChange} className="form-control" placeholder="Nội dung chia sẻ..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -40,6 +61,9 @@ const Post: React.FC<{}> = (props) => {
                                 </svg>
                                 <span>Chọn video</span>
                             </a>
+                        </li>
+                        <li className="postNow ml-auto">
+                            <button onClick={handlePost} className="btn btn-primary" type="button" disabled={dataPost.content === ''}>Đăng</button>
                         </li>
                     </ul>
                 </div>

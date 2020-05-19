@@ -4,7 +4,6 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import Routes from './routes/routes';
-import isAuth from './helper/auth/jwt.middleware';
 class App {
     public app: Application;
     constructor(){
@@ -20,7 +19,6 @@ class App {
         dotenv.config();
     }
     private routes() {
-        this.app.use(isAuth)
         this.app.use('/api/v1', Routes.router)
         this.app.get("/", (req, res, next) => {
             res.send({

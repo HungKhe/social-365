@@ -41,6 +41,7 @@
         padding: 0 1em 1em;
         .list {
             display: flex;
+            align-items: center;
             li{
                 margin-right: 1em;
                 a {
@@ -55,6 +56,15 @@
                         width: 1.2em;
                         height: 1.2em;
                         margin-right: 5px;
+                    }
+                }
+                .btn {
+                    height: 35px;
+                    padding: 0 1.2em;
+                    border-radius: 30px;
+                    &:disabled{
+                        opacity: .5;
+                        cursor: default;
                     }
                 }
             }

@@ -2,10 +2,15 @@ import React from 'react';
 import CommunityPage from '../page/CommunityPage';
 import Post from '../components/Post/Post';
 
-const Community: React.FC<{}> = () => {
+interface Community {
+}
+const Community: React.FC<Community> = (props) => {
+    const onHandlePost = (dataPost: any) => {
+        console.log("dataPost: ", dataPost);
+    }
     return(
         <>
-            <Post />
+            <Post prHandlePost={onHandlePost}/>
             <CommunityPage />
         </>
     )
