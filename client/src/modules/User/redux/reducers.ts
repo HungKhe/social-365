@@ -2,7 +2,7 @@ import * as types from './types';
 const initialState: types.userMODInterface = {
     register: {
         error: false,
-        status: "",
+        message: "",
         isSuccess: false
     },
     auth: {
@@ -20,8 +20,8 @@ const userReducer = (state = initialState, action: types.UserTypes) => {
         case types.USER_LOGIN_SUCCESS:
             let { data } = payload;
             let { tokenList, user } = data;
-            localStorage.setItem('userToken', JSON.stringify(tokenList.accessToken));
-            return { ...state, auth: { isLogged: true, userToken: tokenList.accessToken }, user: user };
+            localStorage.setItem('userToken', JSON.stringify(tokenList.access_token));
+            return { ...state, auth: { isLogged: true, userToken: tokenList.access_token }, user: user };
         case types.USER_LOGIN_FAILED:
             return { ...state, auth: { isLogged: false, userToken: '' } };
 

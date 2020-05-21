@@ -90,6 +90,148 @@ a{
         transform: rotate(360deg);
     }
 }
+
+.loader-star{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    .star{
+        width: 60px;
+        height: 60px;
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+        -webkit-animation: loader-star 1s ease alternate infinite;
+        animation: loader-star 1s ease alternate infinite;
+    }
+    .loader-circles {
+        width: 8px;
+        height: 8px;
+        background: $mainColor;
+        border-radius: 50%;
+        position: absolute;
+        left: calc(50% - 4px);
+        top: calc(50% - 4px);
+        -webkit-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        transition: all 1s ease;
+        -webkit-animation: loader-circles 1s ease-in-out alternate infinite;
+        animation: loader-circles 1s ease-in-out alternate infinite;
+    }
+}
+
+@-webkit-keyframes loader-star {
+    0% {
+        -webkit-transform: scale(0) rotate(0deg);
+        transform: scale(0) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: scale(0.7) rotate(360deg);
+        transform: scale(0.7) rotate(360deg);
+    }
+}
+
+@keyframes loader-star {
+    0% {
+        -webkit-transform: scale(0) rotate(0deg);
+        transform: scale(0) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: scale(0.7) rotate(360deg);
+        transform: scale(0.7) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes loader-circles {
+    0% {
+        -webkit-box-shadow: 0 0 0 $mainColor;
+        box-shadow: 0 0 0 $mainColor;
+        opacity: 1;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        -webkit-box-shadow: 24px -22px $mainColor, 30px -15px 0 -3px $mainColor, 31px 0px $mainColor, 29px 9px 0 -3px $mainColor, 24px 23px $mainColor, 17px 30px 0 -3px $mainColor, 0px 33px $mainColor, -10px 28px 0 -3px $mainColor, -24px 22px $mainColor, -29px 14px 0 -3px $mainColor, -31px -3px $mainColor, -30px -11px 0 -3px $mainColor, -20px -25px $mainColor, -12px -30px 0 -3px $mainColor, 5px -29px $mainColor, 13px -25px 0 -3px $mainColor;
+        box-shadow: 24px -22px $mainColor, 30px -15px 0 -3px $mainColor, 31px 0px $mainColor, 29px 9px 0 -3px $mainColor, 24px 23px $mainColor, 17px 30px 0 -3px $mainColor, 0px 33px $mainColor, -10px 28px 0 -3px $mainColor, -24px 22px $mainColor, -29px 14px 0 -3px $mainColor, -31px -3px $mainColor, -30px -11px 0 -3px $mainColor, -20px -25px $mainColor, -12px -30px 0 -3px $mainColor, 5px -29px $mainColor, 13px -25px 0 -3px $mainColor;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -webkit-box-shadow: 25px -22px $mainColor, 15px -22px 0 -3px black, 31px 2px $mainColor, 21px 2px 0 -3px black, 23px 25px $mainColor, 13px 25px 0 -3px black, 0px 33px $mainColor, -10px 33px 0 -3px black, -26px 24px $mainColor, -19px 17px 0 -3px black, -32px 0px $mainColor, -23px 0px 0 -3px black, -25px -23px $mainColor, -16px -23px 0 -3px black, 0px -31px $mainColor, -2px -23px 0 -3px black;
+        box-shadow: 25px -22px $mainColor, 15px -22px 0 -3px black, 31px 2px $mainColor, 21px 2px 0 -3px black, 23px 25px $mainColor, 13px 25px 0 -3px black, 0px 33px $mainColor, -10px 33px 0 -3px black, -26px 24px $mainColor, -19px 17px 0 -3px black, -32px 0px $mainColor, -23px 0px 0 -3px black, -25px -23px $mainColor, -16px -23px 0 -3px black, 0px -31px $mainColor, -2px -23px 0 -3px black;
+    }
+}
+
+@keyframes loader-circles {
+    0% {
+        -webkit-box-shadow: 0 0 0 $mainColor;
+        box-shadow: 0 0 0 $mainColor;
+        opacity: 1;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        -webkit-box-shadow: 24px -22px $mainColor, 30px -15px 0 -3px $mainColor, 31px 0px $mainColor, 29px 9px 0 -3px $mainColor, 24px 23px $mainColor, 17px 30px 0 -3px $mainColor, 0px 33px $mainColor, -10px 28px 0 -3px $mainColor, -24px 22px $mainColor, -29px 14px 0 -3px $mainColor, -31px -3px #e11a2b, -30px -11px 0 -3px $mainColor, -20px -25px $mainColor, -12px -30px 0 -3px $mainColor, 5px -29px $mainColor, 13px -25px 0 -3px $mainColor;
+        box-shadow: 24px -22px $mainColor, 30px -15px 0 -3px $mainColor, 31px 0px $mainColor, 29px 9px 0 -3px $mainColor, 24px 23px $mainColor, 17px 30px 0 -3px $mainColor, 0px 33px $mainColor, -10px 28px 0 -3px $mainColor, -24px 22px $mainColor, -29px 14px 0 -3px $mainColor, -31px -3px $mainColor, -30px -11px 0 -3px $mainColor, -20px -25px $mainColor, -12px -30px 0 -3px $mainColor, 5px -29px $mainColor, 13px -25px 0 -3px $mainColor;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -webkit-box-shadow: 25px -22px $mainColor, 15px -22px 0 -3px black, 31px 2px $mainColor, 21px 2px 0 -3px black, 23px 25px $mainColor, 13px 25px 0 -3px black, 0px 33px $mainColor, -10px 33px 0 -3px black, -26px 24px $mainColor, -19px 17px 0 -3px black, -32px 0px $mainColor, -23px 0px 0 -3px black, -25px -23px $mainColor, -16px -23px 0 -3px black, 0px -31px $mainColor, -2px -23px 0 -3px black;
+        box-shadow: 25px -22px $mainColor, 15px -22px 0 -3px black, 31px 2px $mainColor, 21px 2px 0 -3px black, 23px 25px $mainColor, 13px 25px 0 -3px black, 0px 33px $mainColor, -10px 33px 0 -3px black, -26px 24px $mainColor, -19px 17px 0 -3px black, -32px 0px $mainColor, -23px 0px 0 -3px black, -25px -23px $mainColor, -16px -23px 0 -3px black, 0px -31px $mainColor, -2px -23px 0 -3px black;
+    }
+}
+
+$leftSquare: 70px, 60px, 50px, 40px, 30px, 20px, 10px, 0px;
+$timeSquare: 0.125s, 0.3s, 0.425s, 0.540s, 0.665s, 0.79s, 0.9s, 1s;
+.l-loader{
+    position: relative;
+    width: 100px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    .css-square {
+        position: absolute;
+        top: 50%;
+        width: 25px;
+        height: 7px;
+        background: #000;
+        box-shadow: 2px 2px 3px 0px #999;
+        @each $left in $leftSquare {
+            $i: index($leftSquare, $left);
+            &.square#{$i} { 
+                left: $left;
+            }
+        }
+        @each $time in $timeSquare {
+            $i: index($timeSquare, $time);
+            &.square#{$i} { 
+                animation: dominos 1s $time ease infinite;
+            }
+        }
+    }
+}
+
+@-webkit-keyframes dominos {
+    50% { opacity: 0.7; }
+    75% { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+    80% { opacity: 1; } 
+}  
+@keyframes dominos {
+    50% { opacity: 0.7; }
+    75% { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+    80% { opacity: 1; } 
+}
+
 .authPage {
     height: 100vh;
     width: 100vw;

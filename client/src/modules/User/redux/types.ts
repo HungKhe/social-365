@@ -41,7 +41,7 @@ export interface userRegister {
 
 export interface userRegisterState {
     error: boolean,
-    status: string,
+    message: string,
     isSuccess: boolean
 }
 

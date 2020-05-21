@@ -17,7 +17,7 @@ function* workUserLogin({ payload }: any){
         const res: any = yield call(serviceUserLogin, payload);
         const data: any = res.data;
         if(data.error){
-            toastShowMessage('error', data.status);
+            toastShowMessage('error', data.message);
             yield put(loadingAct.actShowLoading({ isLoading: false }));
             return yield put(actions.actUserLoginFailed(data));
         }
