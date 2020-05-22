@@ -1,3 +1,18 @@
+.defaultAvatar {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background: rgb(230, 230, 230);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    margin-right: 1em;
+    .svg-icon{
+        width: 1.7em;
+        height: 1.7em;
+    }
+}
 .communityPost {
     background: #fff;
     position: relative;
@@ -13,19 +28,6 @@
         padding: 1em 0 .5em;
         margin: 0 1em .5em;
         border-bottom: 1px solid rgb(240, 242, 245);
-        .defaultAvatar {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            background: rgb(230, 230, 230);
-            line-height: 45px;
-            border-radius: 50px;
-            margin-right: 1em;
-            .svg-icon{
-                width: 1.7em;
-                height: 1.7em;
-            }
-        }
         .textInput {
             flex: 1;
             .form-control {
@@ -67,6 +69,37 @@
                         cursor: default;
                     }
                 }
+            }
+        }
+    }
+}
+.postItem {
+    border: none;
+    border-radius: 0;
+    background-color: #fff;
+    .card-header {
+        border-radius: 0;
+        background: transparent;
+        padding: .5rem 1rem;
+        .defaultAvatar{
+            width: 45px;
+            height: 45px;
+        }
+        .name {
+            p {
+                margin: 0;
+                font-weight: 500;
+            }
+        }
+    }
+    .card-footer {
+        border-radius: 0;
+        background: transparent;
+        li {
+            margin-right: .5rem;
+            .svg-icon{
+                width: 1.3em;
+                height: 1.3em;
             }
         }
     }
