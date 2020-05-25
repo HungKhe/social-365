@@ -49,16 +49,23 @@ class postController {
     }
     async onFetchListPost(req: Request, res: Response){
         var user: any = await isAuth(req, res);
-        if(!user)
+        if(user.error)
             return res.status(401).send({
                 error: true,
-                message: '401 Unauthorized!!!'
+                message: user.message || '401 Unauthorized'
             });
         
-        const { page, limit } = req.query;
+        let page: number = req.query.page ? parseInt(req.query.page) : 1;
+        let limit: number = req.query.limit ? parseInt(req.query.limit) : 10;
+        let offset: number = page === 1 ? limit : page * limit;
         console.log("req.query: ", req.query)
         try {
-            
+            const listPost = await PostsModel.find().skip(offset)
+            .limit(limit)
+            .sort({
+                create_date: 'asc'
+            }).exec().then( r => r );
+            console.log('listPost: ', listPost)
         } catch (error) {
             return res.json({
                 error: true,

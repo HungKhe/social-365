@@ -1,5 +1,5 @@
 import * as types from './types';
-const initialState: types.fetchPostState = {
+const initialState: types.postMODInterface = {
     error: false,
     message: "",
     isLoading: false,
@@ -19,9 +19,8 @@ const initialState: types.fetchPostState = {
     ]
 }
 
-const PostReducer = (state: types.fetchPostState = initialState, action: types.PostType) => {
+const PostReducer = (state: types.postMODInterface = initialState, action: types.PostType) => {
     const { payload } = action;
-    console.log('post action: ', action);
     switch(action.type){
         case types.FETCH_LIST_POST:
             return { ...state, isLoading: true };

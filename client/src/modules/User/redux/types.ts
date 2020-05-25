@@ -67,4 +67,12 @@ export interface userMODInterface {
     auth: userLoginState,
     user: any
 }
-export type UserTypes = UserLoginType | UserRegisterType;
+// LOGOUT
+export const USER_LOGOUT = "USER_LOGOUT";
+interface typeUserLogout {
+    type: typeof USER_LOGOUT,
+    payload: any
+}
+type UserLogoutType = typeUserLogout;
+
+export type UserTypes = UserLoginType | UserRegisterType | UserLogoutType;

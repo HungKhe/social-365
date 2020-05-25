@@ -41,3 +41,10 @@ export const actUserRegisterFailed = (data: any): types.UserTypes => {
         payload: data
     }
 }
+
+export const actUserLogout = (data: any): types.UserTypes => {
+    return {
+        type: types.USER_LOGOUT,
+        payload: data
+    }
+}

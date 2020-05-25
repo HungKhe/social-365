@@ -4,6 +4,7 @@ import * as actions from './actions';
 import * as loadingAct from '../../Loading/container/types';
 import services from '../../../utils/services';
 import { toastShowMessage } from '../../../utils/toastify';
+import api from '../../../utils/api';
 
 // LOGIN
 function serviceUserLogin(data: types.userLogin) {
@@ -21,6 +22,10 @@ function* workUserLogin({ payload }: any){
             yield put(loadingAct.actShowLoading({ isLoading: false }));
             return yield put(actions.actUserLoginFailed(data));
         }
+        const { tokenList } = data.data;
+        const { access_token } = tokenList;
+        localStorage.setItem('userToken', tokenList.access_token);
+        api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
         yield put(actions.actUserLoginSuccess(data));
     } catch (error) {
         toastShowMessage('error', error.toString());
@@ -53,6 +58,7 @@ function* workUserRegister({ payload }: any){
     }
     yield put(loadingAct.actShowLoading({ isLoading: false }));
 }
+
 export const userSaga = [
     takeLatest(types.USER_LOGIN, workUserLogin),
     takeLatest(types.USER_REGISTER, workUserRegister)

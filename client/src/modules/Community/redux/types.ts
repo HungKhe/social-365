@@ -19,7 +19,7 @@ export interface itfPostItem {
     videos: any[],
     my_post: boolean
 }
-export interface fetchPostState {
+export interface postMODInterface {
     error: boolean,
     message: string,
     isLoading: boolean,

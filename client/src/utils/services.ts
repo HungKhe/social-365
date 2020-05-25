@@ -9,6 +9,6 @@ export default {
         return api.put('/user', data);
     },
     apiFetchListPost: (params: postTypes.fetchPost) => {
-        return api.get('/posts', { params });
+        return api.get('/community/post', { params });
     }
 }

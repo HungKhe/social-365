@@ -10,8 +10,19 @@ export const isAuth = async (req:Request , res: Response) => {
     if (tokenFromClient) {
         if(tokenFromClient.indexOf('Bearer ') > -1)
             tokenFromClient = tokenFromClient.replace('Bearer ','').trim();
-        const decoded = await verifyToken(tokenFromClient, accessTokenSecret);
-        return decoded;
+        try {
+            const decoded = await verifyToken(tokenFromClient, accessTokenSecret);
+            return decoded;
+        } catch (error) {
+            const err = JSON.parse(JSON.stringify(error));
+            return {
+                error: true,
+                message: err.message
+            };
+        }
     }
-    return false;
+    return {
+        error: true,
+        message: "401 Unauthorized"
+    };
 }

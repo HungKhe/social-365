@@ -95,11 +95,11 @@ class userController {
         }
     }
     public onGetInfoMember = async (req: Request, res: Response) => {
-        const user = await isAuth(req, res);
-        if(!user)
+        const user: any = await isAuth(req, res);
+        if(user.error)
             return res.status(401).send({
                 error: true,
-                message: '401 Unauthorized'
+                message: user.message || '401 Unauthorized'
             });
         console.log(user)
         const { data }: any = user ;

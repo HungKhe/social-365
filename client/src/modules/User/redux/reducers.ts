@@ -20,7 +20,6 @@ const userReducer = (state = initialState, action: types.UserTypes) => {
         case types.USER_LOGIN_SUCCESS:
             let { data } = payload;
             let { tokenList, user } = data;
-            localStorage.setItem('userToken', JSON.stringify(tokenList.access_token));
             return { ...state, auth: { isLogged: true, userToken: tokenList.access_token }, user: user };
         case types.USER_LOGIN_FAILED:
             return { ...state, auth: { isLogged: false, userToken: '' } };
@@ -34,6 +33,8 @@ const userReducer = (state = initialState, action: types.UserTypes) => {
             register = { ...payload.data, isSuccess: false };
             return { ...state, register };
 
+        case types.USER_LOGOUT:
+            return { ...state, auth: { isLogged: false, userToken: '' }, user: {}, register: {}};
         default:
             return state;
     }
