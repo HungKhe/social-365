@@ -21,6 +21,7 @@ class Routes {
     public initPostRouter(): void {
         this.router.route("/community/post")
             .post(postController.onCreateNewPost)
+            .get(postController.onFetchListPost)
     }
 }
 export default new Routes();

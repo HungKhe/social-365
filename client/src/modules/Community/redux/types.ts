@@ -7,22 +7,23 @@ export interface fetchPost {
     page: number,
     limit: number
 }
+export interface itfPostItem {
+    post_id: any,
+    content: string,
+    replyCount: number,
+    likeCount: number,
+    user: any,
+    create_date: any,
+    replies: any[],
+    images: any[],
+    videos: any[],
+    my_post: boolean
+}
 export interface fetchPostState {
     error: boolean,
     message: string,
     isLoading: boolean,
-    listPost: {
-        post_id: any,
-        content: string,
-        replyCount: number,
-        likeCount: number,
-        user: any,
-        create_date: any,
-        replies: any[],
-        images: any[],
-        videos: any[],
-        my_post: boolean
-    }
+    listPost: itfPostItem[]
 }
 interface fetchListPost {
     type: typeof FETCH_LIST_POST,

@@ -23,7 +23,6 @@ function* workUserLogin({ payload }: any){
         }
         yield put(actions.actUserLoginSuccess(data));
     } catch (error) {
-        console.log("error: ", JSON.parse(JSON.stringify(error)))
         toastShowMessage('error', error.toString());
         yield put(actions.actUserLoginFailed(error));
     }
@@ -42,11 +41,11 @@ function* workUserRegister({ payload }: any){
         const res: any = yield call(serviceUserRegister, payload);
         const data: any = res.data;
         if(data.error){
-            toastShowMessage('error', data.status);
+            toastShowMessage('error', data.message);
             yield put(loadingAct.actShowLoading({ isLoading: false }));
             return yield put(actions.actUserRegisterFailed(data));
         }
-        toastShowMessage('success', data.status);
+        toastShowMessage('success', data.message);
         yield put(actions.actUserRegisterSuccess(data));
     } catch (error) {
         toastShowMessage('error', error.toString());

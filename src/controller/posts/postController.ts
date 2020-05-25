@@ -47,6 +47,25 @@ class postController {
             });
         }
     }
+    async onFetchListPost(req: Request, res: Response){
+        var user: any = await isAuth(req, res);
+        if(!user)
+            return res.status(401).send({
+                error: true,
+                message: '401 Unauthorized!!!'
+            });
+        
+        const { page, limit } = req.query;
+        console.log("req.query: ", req.query)
+        try {
+            
+        } catch (error) {
+            return res.json({
+                error: true,
+                message: error.toString()
+            });
+        }
+    }
 }
 
 export default new postController();
