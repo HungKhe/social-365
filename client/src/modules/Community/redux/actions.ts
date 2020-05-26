@@ -20,3 +20,24 @@ export const actFetchListPostFailed = (data: any): types.PostType => {
         payload: data
     }
 }
+
+export const actCreatePost = (post: types.itfCreatePost): types.PostType => {
+    return {
+        type: types.CREATE_POST,
+        payload: post
+    }
+}
+
+export const actCreatePostSuccess = (data: any): types.PostType => {
+    return {
+        type: types.CREATE_POST_SUCCESS,
+        payload: data
+    }
+}
+
+export const actCreatePostFailed = (data: any): types.PostType => {
+    return {
+        type: types.CREATE_POST_FAILED,
+        payload: data
+    }
+}

@@ -34,7 +34,7 @@ const userReducer = (state = initialState, action: types.UserTypes) => {
             return { ...state, register };
 
         case types.USER_LOGOUT:
-            return { ...state, auth: { isLogged: false, userToken: '' }, user: {}, register: {}};
+            return { ...state, auth: { isLogged: false, userToken: '' }, user: {}, register: {isSuccess: false}};
         default:
             return state;
     }

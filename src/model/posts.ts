@@ -1,4 +1,5 @@
 import mongoose from './index';
+import mongoosePaginate from 'mongoose-paginate-v2';
 const schema = {
     post_id: { type: mongoose.Types.ObjectId, auto: true },
     content: {
@@ -38,6 +39,7 @@ const schema = {
     }
 };
 const collectionName = "posts";
-const shopSchema = new mongoose.Schema(schema);
-const PostsModel = mongoose.model(collectionName, shopSchema);
+const postSchema = new mongoose.Schema(schema);
+postSchema.plugin(mongoosePaginate);
+const PostsModel = mongoose.model(collectionName, postSchema);
 export default PostsModel;

@@ -21,6 +21,7 @@ const Community: React.FC<Community> = (props) => {
     const dispatch = useDispatch();
     const onHandlePost = (dataPost: any) => {
         console.log("dataPost: ", dataPost);
+        dispatch(actions.actCreatePost(dataPost));
     }
     useEffect(() => {
         dispatch(actions.actFetchListPost(queryPost));
@@ -28,9 +29,11 @@ const Community: React.FC<Community> = (props) => {
     return(
         <>
             <Post prHandlePost={onHandlePost}/>
-            <CommunityPage />
+            {
+                !postSelector.isLoading ? <CommunityPage listPost={postSelector.listPost}/> : null
+            }
             <LoadingLine isLoading={postSelector.isLoading} />
-            <div className={`loadMore ${postSelector.isLoading || postSelector.listPost.length === 0 ? 'd-none' : ''}`}>
+            <div className={`loadMore ${postSelector.isLoading || postSelector.totalPages <= queryPost.page ? 'd-none' : ''}`}>
                 <a href="javascript:;">Load more posts</a>
             </div>
         </>

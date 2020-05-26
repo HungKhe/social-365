@@ -1,7 +1,10 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-
-const PostItem: React.FC<{}> = props => {
+import { itfPostItem } from '../../redux/types';
+interface PostItem {
+    post: itfPostItem
+}
+const PostItem: React.FC<PostItem> = ({post}) => {
     return (
         <Card className="postItem shadowPage mt-4">
             <Card.Header className="d-flex">

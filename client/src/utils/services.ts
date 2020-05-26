@@ -10,5 +10,8 @@ export default {
     },
     apiFetchListPost: (params: postTypes.fetchPost) => {
         return api.get('/community/post', { params });
+    },
+    apiCreatePost: (post: postTypes.itfCreatePost) => {
+        return api.post('/community/post', post);
     }
 }

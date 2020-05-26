@@ -24,7 +24,29 @@ function* workFetchListPost({ payload }: any){
         yield put(actions.actFetchListPostFailed(error));
     }
 }
+// CREATE POST
+function serviceCreatePost(post: types.itfCreatePost){
+    return services.apiCreatePost(post);
+}
+
+function* workCreatePost({payload}: any){
+    yield put(loadingAct.actShowLoading({ isLoading: true }));
+    yield delay(2000);
+    try {
+        const res = yield call(serviceCreatePost, payload);
+        const { data }: any = res;
+        toastShowMessage('success', data.message);
+        yield put(actions.actCreatePostSuccess(data));
+    } catch (error) {
+        const err = JSON.parse(JSON.stringify(error))
+        toastShowMessage('error', err.message);
+        yield put(actions.actCreatePostFailed(err));
+    }
+    yield put(loadingAct.actHiddenLoading({ isLoading: false }))
+}
+
 
 export const postSaga = [
-    takeLatest(types.FETCH_LIST_POST, workFetchListPost)
+    takeLatest(types.FETCH_LIST_POST, workFetchListPost),
+    takeLatest(types.CREATE_POST, workCreatePost)
 ]
