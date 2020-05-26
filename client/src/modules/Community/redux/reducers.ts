@@ -34,7 +34,7 @@ const PostReducer = (state: types.postMODInterface = initialState, action: types
             return { ...state };
         case types.CREATE_POST_SUCCESS:
             let list = [... state.listPost ];
-            list.push(payload.data);
+            list.unshift(payload.data);
             return { ...state, listPost: list };
         case types.CREATE_POST_FAILED:
             return { ...state }

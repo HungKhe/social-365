@@ -1,29 +1,52 @@
 import React from 'react';
+import Moment from 'react-moment';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card';
 import { itfPostItem } from '../../redux/types';
 interface PostItem {
-    post: itfPostItem
+    post: itfPostItem;
+    prHandleEditPost: (post?: itfPostItem) => void;
+    prHandleDeletePost: (post_id?: string) => void;
 }
-const PostItem: React.FC<PostItem> = ({post}) => {
+const PostItem: React.FC<PostItem> = (props) => {
+    const { post, prHandleDeletePost, prHandleEditPost } = props;
+    const handleEditPost = (post: itfPostItem) => {
+        prHandleEditPost(post);
+    }
+    const handleDeletePost = (post_id: string) => {
+        prHandleDeletePost(post_id);
+    }
     return (
         <Card className="postItem shadowPage mt-4">
             <Card.Header className="d-flex">
                 <div className="avatar">
-                    <div className="defaultAvatar">
-                        <svg className="svg-icon" viewBox="0 0 20 20">
-                            <path fill="none" d="M10,10.9c2.373,0,4.303-1.932,4.303-4.306c0-2.372-1.93-4.302-4.303-4.302S5.696,4.223,5.696,6.594C5.696,8.969,7.627,10.9,10,10.9z M10,3.331c1.801,0,3.266,1.463,3.266,3.263c0,1.802-1.465,3.267-3.266,3.267c-1.8,0-3.265-1.465-3.265-3.267C6.735,4.794,8.2,3.331,10,3.331z"></path>
-                            <path fill="none" d="M10,12.503c-4.418,0-7.878,2.058-7.878,4.685c0,0.288,0.231,0.52,0.52,0.52c0.287,0,0.519-0.231,0.519-0.52c0-1.976,3.132-3.646,6.84-3.646c3.707,0,6.838,1.671,6.838,3.646c0,0.288,0.234,0.52,0.521,0.52s0.52-0.231,0.52-0.52C17.879,14.561,14.418,12.503,10,12.503z"></path>
-                        </svg>
-                    </div>
+                    {
+                        post.user && post.user.user_photo ?
+                        <div className="userPhoto" style={{ backgroundImage: `url(${ post.user.user_photo })`}}></div>
+                        :
+                        <div className="defaultAvatar">
+                            <svg className="svg-icon" viewBox="0 0 20 20">
+                                <path fill="none" d="M10,10.9c2.373,0,4.303-1.932,4.303-4.306c0-2.372-1.93-4.302-4.303-4.302S5.696,4.223,5.696,6.594C5.696,8.969,7.627,10.9,10,10.9z M10,3.331c1.801,0,3.266,1.463,3.266,3.263c0,1.802-1.465,3.267-3.266,3.267c-1.8,0-3.265-1.465-3.265-3.267C6.735,4.794,8.2,3.331,10,3.331z"></path>
+                                <path fill="none" d="M10,12.503c-4.418,0-7.878,2.058-7.878,4.685c0,0.288,0.231,0.52,0.52,0.52c0.287,0,0.519-0.231,0.519-0.52c0-1.976,3.132-3.646,6.84-3.646c3.707,0,6.838,1.671,6.838,3.646c0,0.288,0.234,0.52,0.521,0.52s0.52-0.231,0.52-0.52C17.879,14.561,14.418,12.503,10,12.503z"></path>
+                            </svg>
+                        </div>
+                    }
+                    
                 </div>
                 <div className="name">
-                    <p>Lê Văn An</p>
-                    <time>20/05/2020</time>
+                    <p>
+                    {
+                        post.user.user_full_name ? post.user.user_full_name : post.user.user_email
+                    }
+                    </p>
+                    <Moment format="HH:mm DD/MM/YYYY">
+                        { post.create_date }
+                    </Moment>
                 </div>
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-                    Màu khó sử dụng, tuy vậy chất son ổn, mau khô và lì lại trên môi, không gây khó chịu hay khô môi. Có mùi nhẹ sẽ, bay dần theo thời gian.
+                    { post.content }
                 </Card.Text>
             </Card.Body>
             <Card.Footer>
@@ -47,18 +70,38 @@ const PostItem: React.FC<PostItem> = ({post}) => {
                             </svg>
                         </a>
                     </li>
-                    <li className="actions ml-auto mr-0">
-                        <a href="javascript:;">
-                            <svg className="svg-icon" viewBox="0 0 20 20">
-                                <path fill="none" d="M1.321,3.417h17.024C18.707,3.417,19,3.124,19,2.762c0-0.362-0.293-0.655-0.654-0.655H1.321
-                                    c-0.362,0-0.655,0.293-0.655,0.655C0.667,3.124,0.959,3.417,1.321,3.417z M18.346,15.857H8.523c-0.361,0-0.655,0.293-0.655,0.654
-                                    c0,0.362,0.293,0.655,0.655,0.655h9.822c0.361,0,0.654-0.293,0.654-0.655C19,16.15,18.707,15.857,18.346,15.857z M18.346,11.274
-                                    H1.321c-0.362,0-0.655,0.292-0.655,0.654s0.292,0.654,0.655,0.654h17.024c0.361,0,0.654-0.292,0.654-0.654
-                                    S18.707,11.274,18.346,11.274z M18.346,6.69H6.56c-0.362,0-0.655,0.293-0.655,0.655C5.904,7.708,6.198,8,6.56,8h11.786
-                                    C18.707,8,19,7.708,19,7.345C19,6.983,18.707,6.69,18.346,6.69z"></path>
-                            </svg>
-                        </a>
-                    </li>
+                    {
+                        post.my_post ? 
+                        <li className="actions ml-auto mr-0">
+                            <Dropdown>
+                                <Dropdown.Toggle id={`dropdownToggle-${post.post_id}`}>
+                                    <svg className="svg-icon" viewBox="0 0 20 20">
+                                        <path fill="none" d="M1.321,3.417h17.024C18.707,3.417,19,3.124,19,2.762c0-0.362-0.293-0.655-0.654-0.655H1.321
+                                            c-0.362,0-0.655,0.293-0.655,0.655C0.667,3.124,0.959,3.417,1.321,3.417z M18.346,15.857H8.523c-0.361,0-0.655,0.293-0.655,0.654
+                                            c0,0.362,0.293,0.655,0.655,0.655h9.822c0.361,0,0.654-0.293,0.654-0.655C19,16.15,18.707,15.857,18.346,15.857z M18.346,11.274
+                                            H1.321c-0.362,0-0.655,0.292-0.655,0.654s0.292,0.654,0.655,0.654h17.024c0.361,0,0.654-0.292,0.654-0.654
+                                            S18.707,11.274,18.346,11.274z M18.346,6.69H6.56c-0.362,0-0.655,0.293-0.655,0.655C5.904,7.708,6.198,8,6.56,8h11.786
+                                            C18.707,8,19,7.708,19,7.345C19,6.983,18.707,6.69,18.346,6.69z"></path>
+                                    </svg>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#" onClick={() => handleEditPost(post)}>
+                                        <svg className="svg-icon" viewBox="0 0 20 20">
+                                            <path d="M18.303,4.742l-1.454-1.455c-0.171-0.171-0.475-0.171-0.646,0l-3.061,3.064H2.019c-0.251,0-0.457,0.205-0.457,0.456v9.578c0,0.251,0.206,0.456,0.457,0.456h13.683c0.252,0,0.457-0.205,0.457-0.456V7.533l2.144-2.146C18.481,5.208,18.483,4.917,18.303,4.742 M15.258,15.929H2.476V7.263h9.754L9.695,9.792c-0.057,0.057-0.101,0.13-0.119,0.212L9.18,11.36h-3.98c-0.251,0-0.457,0.205-0.457,0.456c0,0.253,0.205,0.456,0.457,0.456h4.336c0.023,0,0.899,0.02,1.498-0.127c0.312-0.077,0.55-0.137,0.55-0.137c0.08-0.018,0.155-0.059,0.212-0.118l3.463-3.443V15.929z M11.241,11.156l-1.078,0.267l0.267-1.076l6.097-6.091l0.808,0.808L11.241,11.156z"></path>
+                                        </svg>
+                                        <span>Edit post</span>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item href="#" onClick={() => handleDeletePost(post.post_id)}>
+                                        <svg className="svg-icon" viewBox="0 0 20 20">
+                                            <path d="M17.114,3.923h-4.589V2.427c0-0.252-0.207-0.459-0.46-0.459H7.935c-0.252,0-0.459,0.207-0.459,0.459v1.496h-4.59c-0.252,0-0.459,0.205-0.459,0.459c0,0.252,0.207,0.459,0.459,0.459h1.51v12.732c0,0.252,0.207,0.459,0.459,0.459h10.29c0.254,0,0.459-0.207,0.459-0.459V4.841h1.511c0.252,0,0.459-0.207,0.459-0.459C17.573,4.127,17.366,3.923,17.114,3.923M8.394,2.886h3.214v0.918H8.394V2.886z M14.686,17.114H5.314V4.841h9.372V17.114z M12.525,7.306v7.344c0,0.252-0.207,0.459-0.46,0.459s-0.458-0.207-0.458-0.459V7.306c0-0.254,0.205-0.459,0.458-0.459S12.525,7.051,12.525,7.306M8.394,7.306v7.344c0,0.252-0.207,0.459-0.459,0.459s-0.459-0.207-0.459-0.459V7.306c0-0.254,0.207-0.459,0.459-0.459S8.394,7.051,8.394,7.306"></path>
+                                        </svg>
+                                        <span>Delete post</span>
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </li>
+                        : null
+                    }
                 </ul>
             </Card.Footer>
         </Card>

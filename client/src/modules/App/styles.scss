@@ -325,8 +325,7 @@ $timeSquare: 0.125s, 0.3s, 0.425s, 0.540s, 0.665s, 0.79s, 0.9s, 1s;
         &:not(:placeholder-shown) {
             padding: 28px 0px 12px 0px;
             & + label {
-                -webkit-transform: translateY(-10px);
-                transform: translateY(-10px);
+                transform: translateY(-15px);
                 opacity: 0.7;
             }
         }
@@ -541,5 +540,31 @@ $timeSquare: 0.125s, 0.3s, 0.425s, 0.540s, 0.665s, 0.79s, 0.9s, 1s;
                 padding: 5px 10px;
             }
         }
+    }
+}
+.closeModal {
+    background: #fff !important;
+    border-color: $mainColor;
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+    border-radius: 50%;
+    outline: none !important;
+    box-shadow: none !important;
+    position: absolute;
+    z-index: 10;
+    right: -10px;
+    top: -10px;
+    .svg-icon{
+        width: 1.5em;
+        height: 1.5em;
+        path, polygon, rect{
+            fill: $mainColor;
+        }
+    }
+}
+.editPostModal {
+    .modal-body {
+        padding: 0;
     }
 }

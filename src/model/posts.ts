@@ -35,7 +35,8 @@ const schema = {
         default: []
     },
     my_post: {
-        type: Boolean
+        type: Boolean,
+        default: true
     }
 };
 const collectionName = "posts";

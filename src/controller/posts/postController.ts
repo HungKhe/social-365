@@ -47,6 +47,7 @@ class postController {
     }
     async onFetchListPost(req: Request, res: Response){
         var user: any = await isAuth(req, res);
+        console.log('user: ', user)
         if(user.error)
             return res.status(401).send({
                 error: true,
@@ -61,14 +62,20 @@ class postController {
             const postOptions: object = {
                 page: currentPage,
                 limit: limitPage,
-                sort:{ date: -1 },
+                sort:{ create_date: -1 },
                 lean: true
             }
 
             const postResult = await PostsModel.paginate(postQuery, postOptions, (error, result) => result);
+            let listPost = postResult.docs.map(post => {
+                post.my_post = false;
+                if(user.data.user_id.toString() === post.user.user_id.toString())
+                    post.my_post = true;
+                return post;
+            })
             res.status(200).json({
                 error: false,
-                data: postResult.docs,
+                data: listPost,
                 currentPage,
                 totalPages: postResult.totalPages
             })

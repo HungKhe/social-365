@@ -90,6 +90,9 @@
                 margin: 0;
                 font-weight: 500;
             }
+            time {
+                font-size: 12px;
+            }
         }
     }
     .card-footer {
@@ -100,6 +103,32 @@
             .svg-icon{
                 width: 1.3em;
                 height: 1.3em;
+            }
+            &.actions{
+                button {
+                    padding: 0;
+                    background: transparent !important;
+                    border: none !important;
+                    outline: none !important;
+                    box-shadow: none !important;
+                    &::after{
+                        display: none;
+                    }
+                }
+                .dropdown-menu {
+                    box-shadow: rgba(0, 0, 0, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 1px 1px 1px 1px;
+                    border: none;
+                    border-radius: 0;
+                    padding: 0;
+                    .dropdown-item {
+                        padding: .5em 1em;
+                        font-size: 15px;
+                        display: flex;
+                        .svg-icon{
+                            margin-right: .5em;
+                        }
+                    }
+                }
             }
         }
     }

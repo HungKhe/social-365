@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+import { itfPostItem } from '../../redux/types'
 import './styles.scss';
 
 interface Post {
+    post?: itfPostItem;
     prHandlePost: (data?: any) => void;
 }
 interface postState {
+    post_id?: string;
     content: string;
-    videos: File[];
-    images: File[];
+    videos: File[] | string[];
+    images: File[] | string[];
 }
 const Post: React.FC<Post> = (props) => {
-    const { prHandlePost } = props;
+    const { prHandlePost, post } = props;
     const [dataPost, setDataPost] = useState<postState>({
-        content: '',
-        videos: [],
-        images: []
+        post_id: post ? post.post_id : null, 
+        content: post ? post.content : '',
+        videos: post? post.videos : [],
+        images: post? post.images : []
     })
     const handleChange = function(e: React.ChangeEvent<HTMLTextAreaElement>){
         setDataPost({ ...dataPost, content: e.target.value });
@@ -27,7 +31,11 @@ const Post: React.FC<Post> = (props) => {
         <div className="communityPost">
             <div className="postWrapper shadowPage">
                 <div className="head">
-                    <h3 className="title">CHIA SẺ</h3>
+                    <h3 className="title">
+                        {
+                            post ? `CHỈNH SỬA` : `CHIA SẺ`
+                        }
+                    </h3>
                 </div>
                 <div className="middle">
                     <div className="d-flex">
@@ -40,7 +48,7 @@ const Post: React.FC<Post> = (props) => {
                             </div>
                         </div>
                         <div className="textInput">
-                            <textarea onChange={handleChange} className="form-control" placeholder="Nội dung chia sẻ..."></textarea>
+                            <textarea value={dataPost.content} onChange={handleChange} className="form-control" placeholder="Nội dung chia sẻ..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -63,7 +71,11 @@ const Post: React.FC<Post> = (props) => {
                             </a>
                         </li>
                         <li className="postNow ml-auto">
-                            <button onClick={handlePost} className="btn btn-primary" type="button" disabled={dataPost.content === ''}>Đăng</button>
+                            <button onClick={handlePost} className="btn btn-primary" type="button" disabled={dataPost.content === ''}>
+                                {
+                                    post ? 'Lưu' : 'Đăng'
+                                }
+                            </button>
                         </li>
                     </ul>
                 </div>
