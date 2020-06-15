@@ -15,7 +15,7 @@ interface postQuery {
 const Community: React.FC<Community> = (props) => {
     const [ queryPost, setQueryPost ] = useState<postQuery>({
         page: 1,
-        limit: 10
+        limit: 5
     })
     const postSelector: postMODInterface = useSelector((state: TypeRootReducer) => state.post);
     const dispatch = useDispatch();
@@ -23,18 +23,25 @@ const Community: React.FC<Community> = (props) => {
         console.log("dataPost: ", dataPost);
         dispatch(actions.actCreatePost(dataPost));
     }
+    const onLoadMorePost = () => {
+        let currentPage = queryPost.page + 1;
+        setQueryPost({...queryPost, page: currentPage});
+    }
     useEffect(() => {
         dispatch(actions.actFetchListPost(queryPost));
-    }, [])
+    }, [queryPost.page])
     return(
         <>
             <Post prHandlePost={onHandlePost}/>
             {
-                !postSelector.isLoading ? <CommunityPage listPost={postSelector.listPost}/> : null
+                !postSelector.isLoading && postSelector.listPost.length === 0 ? 
+                <p className="emptyData text-center my-3">Not posts!</p>
+                :
+                <CommunityPage listPost={postSelector.listPost}/>
             }
             <LoadingLine isLoading={postSelector.isLoading} />
-            <div className={`loadMore ${postSelector.isLoading || postSelector.totalPages <= queryPost.page ? 'd-none' : ''}`}>
-                <a href="javascript:;">Load more posts</a>
+            <div className={`loadMore pb-3 ${postSelector.isLoading || postSelector.totalPages <= queryPost.page ? 'd-none' : ''}`}>
+                <a onClick={onLoadMorePost} href="javascript:;">Load more posts</a>
             </div>
         </>
     )

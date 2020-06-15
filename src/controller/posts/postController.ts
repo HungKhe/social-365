@@ -2,10 +2,12 @@ import { Request, Response, query } from 'express';
 import PostsModel from '../../model/posts';
 import UsersModel from '../../model/users';
 import { isAuth } from '../../helper/auth/jwt.middleware';
+import { removePropertyFromObject } from '../../helper/utils';
 
 class postController {
     constructor(){
         this.onCreateNewPost = this.onCreateNewPost.bind(this);
+        this.onUpdatePost = this.onUpdatePost.bind(this);
     }
     async onCreateNewPost(req: Request, res: Response){
         var user: any = await isAuth(req, res);
@@ -15,7 +17,9 @@ class postController {
                 error: true,
                 message: user.message || '401 Unauthorized'
             });
-        const postData = { ...req.body };
+        let postData = { ...req.body };
+        const removePostId = removePropertyFromObject('post_id');
+        postData = removePostId(postData);
         if(!postData.content)
             return res.status(400).send({
                 message: 'Content is required!!!!'
@@ -27,8 +31,8 @@ class postController {
             if(postData.images && postData.images.length > 0){
     
             }
-            postData.user = await UsersModel.findOne({ 'user_id': user.data.user_id }).lean().exec().then((r: any) => { delete r.token_list; delete r.user_password; return r; });
-            PostsModel.create(postData, async (err: any, post: any) => {
+            postData.user = await UsersModel.findOne({ 'user_id': user.data.user_id }).lean().exec().then((r: any) => { delete r.token_list; delete r.user_password; delete r._id; delete r.__v; return r; });
+            PostsModel.create(postData, (err: any, post: any) => {
                 if (err) {
                     return res.status(501).send({
                         message: "Server error - please try again!!!"
@@ -81,6 +85,48 @@ class postController {
             })
         } catch (error) {
             return res.json({
+                error: true,
+                message: error.toString()
+            });
+        }
+    }
+    async onUpdatePost(req: Request, res: Response){
+        var user: any = await isAuth(req, res);
+        console.log('user', user)
+        if(user.error)
+            return res.status(401).send({
+                error: true,
+                message: user.message || '401 Unauthorized'
+            });
+        let postData = { ...req.body };
+        if(!postData.post_id)
+            return res.status(400).send({
+                message: 'Post id is required!!!!'
+            });
+        if(!postData.content)
+            return res.status(400).send({
+                message: 'Content is required!!!!'
+            });
+        try {
+            if(postData.videos && postData.videos.length > 0){
+
+            }
+            if(postData.images && postData.images.length > 0){
+    
+            }
+            PostsModel.findOneAndUpdate({ 'post_id': postData.post_id }, postData, function(err: any, post: any){
+                if (err) {
+                    return res.status(501).send({
+                        message: "Server error - please try again!!!"
+                    });
+                } else {
+                    console.log('edited: ', post)
+                    const resData = { message: "Update post successfully!!!", data: post}
+                    return res.status(200).json(resData);
+                }
+            });
+        } catch (error) {
+            return res.status(500).json({
                 error: true,
                 message: error.toString()
             });

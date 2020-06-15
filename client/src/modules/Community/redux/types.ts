@@ -67,4 +67,27 @@ interface createPostFailed {
 
 type CreatePostType = createPost | createPostSuccess | createPostFailed;
 
-export type PostType = FetchListPostType | CreatePostType;
+// UPDATE POST
+export const UPDATE_POST = "UPDATE_POST";
+export const UPDATE_POST_SUCCESS = "UPDATE_POST_SUCCESS";
+export const UPDATE_POST_FAILED = "UPDATE_POST_FAILED";
+export interface itfUpdatePost extends itfCreatePost {
+    post_id: string
+}
+
+interface updatePost {
+    type: typeof UPDATE_POST,
+    payload: itfUpdatePost
+}
+interface updatePostSuccess {
+    type: typeof UPDATE_POST_SUCCESS,
+    payload: any
+}
+interface updatePostFailed {
+    type: typeof UPDATE_POST_FAILED,
+    payload: any
+}
+
+type UpdatePostType = updatePost | updatePostSuccess | updatePostFailed;
+
+export type PostType = FetchListPostType | CreatePostType | UpdatePostType;

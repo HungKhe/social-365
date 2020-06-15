@@ -31,8 +31,6 @@ const CommunityPage: React.FC<CommunityPage> = props => {
     return (
         <div className="listPosts mb-3">
             {
-                listPost.length === 0 ? <p className="emptyData text-center my-3">Not posts!</p>
-                :
                 listPost.map(post => <PostItem key={post.post_id} 
                     post={post}
                     prHandleEditPost = {handleEditPost}

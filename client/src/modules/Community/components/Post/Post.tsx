@@ -15,7 +15,7 @@ interface postState {
 const Post: React.FC<Post> = (props) => {
     const { prHandlePost, post } = props;
     const [dataPost, setDataPost] = useState<postState>({
-        post_id: post ? post.post_id : null, 
+        post_id: post ? post.post_id : 0, 
         content: post ? post.content : '',
         videos: post? post.videos : [],
         images: post? post.images : []
@@ -25,7 +25,8 @@ const Post: React.FC<Post> = (props) => {
     }
     const handlePost = function(e: React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
-        prHandlePost(dataPost);
+        prHandlePost({...dataPost});
+        setDataPost({...dataPost, content: '', videos: [], images: []})
     }
     return(
         <div className="communityPost">
