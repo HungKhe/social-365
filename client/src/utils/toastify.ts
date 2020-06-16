@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 export const toastShowMessage = (type: string, message: string) => {
-    const defaultMessage = message || "Lỗi hệ thống. Vui lòng thử lại sau!!!";
+    const defaultMessage = message || "Server error - please try again!!!";
     switch(type){
         case "success": 
             toast.success(defaultMessage);

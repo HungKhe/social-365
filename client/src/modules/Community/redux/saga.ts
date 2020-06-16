@@ -66,8 +66,8 @@ function* workUpdatePost({payload}: any){
 }
 
 // DELETE POST
-function serviceDeletePost(post: types.itfUpdatePost){
-    return services.apiDeletePost(post);
+function serviceDeletePost(post_id: types.itfDeletePost){
+    return services.apiDeletePost(post_id);
 }
 
 function* workDeletePost({payload}: any){
@@ -75,11 +75,14 @@ function* workDeletePost({payload}: any){
     yield delay(2000);
     try {
         const res = yield call(serviceDeletePost, payload);
+        debugger;
         const { data }: any = res;
+        console.log('data: ', data)
         toastShowMessage('success', data.message);
         yield put(actions.actDeletePostSuccess(data));
     } catch (error) {
         const err = JSON.parse(JSON.stringify(error))
+        console.log({err});
         toastShowMessage('error', err.message);
         yield put(actions.actDeletePostFailed(err));
     }

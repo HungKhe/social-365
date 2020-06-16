@@ -63,10 +63,10 @@ export const actUpdatePostFailed = (data: any): types.PostType => {
     }
 }
 
-export const actDeletePost = (id: types.itfDeletePost): types.PostType => {
+export const actDeletePost = (post_id: types.itfDeletePost): types.PostType => {
     return {
         type: types.DELETE_POST,
-        payload: id
+        payload: post_id
     }
 }
 

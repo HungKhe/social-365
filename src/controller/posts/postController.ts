@@ -164,11 +164,11 @@ class postController {
                     });
                 } else {
                     const resData = { message: "Delete post successfully!!!", data: { post_id: id }}
-                    return res.status(200).json(resData);
+                    return res.status(200).send(resData);
                 }
             });
         } catch (error) {
-            return res.status(500).json({
+            return res.status(500).send({
                 error: true,
                 message: error.toString()
             });

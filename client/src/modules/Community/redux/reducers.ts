@@ -49,12 +49,13 @@ const PostReducer = (state: types.postMODInterface = initialState, action: types
         case types.DELETE_POST:
             return { ...state };
         case types.DELETE_POST_SUCCESS:
-            console.log('post_id: ', post_id)
-            const indDelete = state.listPost.findIndex((item) => {
-                return item.post_id === post_id;
+            let deleteId = payload.data.post_id;
+            let listDelete = [...state.listPost];
+            const indDelete = listDelete.findIndex((item) => {
+                return item.post_id === deleteId;
             });
-            if(indDelete >= 0) state.listPost.splice(indDelete, 1);
-            return { ...state };
+            if(indDelete >= 0) listDelete.splice(indDelete, 1);
+            return { ...state, listPost: [...listDelete] };
         case types.DELETE_POST_FAILED:
             return { ...state }
 
