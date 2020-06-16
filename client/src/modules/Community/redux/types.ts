@@ -74,7 +74,6 @@ export const UPDATE_POST_FAILED = "UPDATE_POST_FAILED";
 export interface itfUpdatePost extends itfCreatePost {
     post_id: string
 }
-
 interface updatePost {
     type: typeof UPDATE_POST,
     payload: itfUpdatePost
@@ -90,4 +89,26 @@ interface updatePostFailed {
 
 type UpdatePostType = updatePost | updatePostSuccess | updatePostFailed;
 
-export type PostType = FetchListPostType | CreatePostType | UpdatePostType;
+// DELETE POST
+export const DELETE_POST = "DELETE_POST";
+export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS";
+export const DELETE_POST_FAILED = "DELETE_POST_FAILED";
+export interface itfDeletePost {
+    post_id: string
+}
+interface deletePost {
+    type: typeof DELETE_POST,
+    payload: itfDeletePost
+}
+interface deletePostSuccess {
+    type: typeof DELETE_POST_SUCCESS,
+    payload: any
+}
+interface deletePostFailed {
+    type: typeof DELETE_POST_FAILED,
+    payload: any
+}
+
+type DeletePostType = deletePost | deletePostSuccess | deletePostFailed;
+
+export type PostType = FetchListPostType | CreatePostType | UpdatePostType | DeletePostType;

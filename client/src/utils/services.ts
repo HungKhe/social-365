@@ -13,5 +13,11 @@ export default {
     },
     apiCreatePost: (post: postTypes.itfCreatePost) => {
         return api.post('/community/post', post);
+    },
+    apiUpdatePost: (post: postTypes.itfUpdatePost) => {
+        return api.put('/community/post', post);
+    },
+    apiDeletePost: (post_id: postTypes.itfDeletePost) => {
+        return api.delete(`/community/post/${post_id}`);
     }
 }

@@ -8,6 +8,7 @@ class postController {
     constructor(){
         this.onCreateNewPost = this.onCreateNewPost.bind(this);
         this.onUpdatePost = this.onUpdatePost.bind(this);
+        this.onDeletePost = this.onDeletePost.bind(this);
     }
     async onCreateNewPost(req: Request, res: Response){
         var user: any = await isAuth(req, res);
@@ -114,7 +115,7 @@ class postController {
             if(postData.images && postData.images.length > 0){
     
             }
-            PostsModel.findOneAndUpdate({ 'post_id': postData.post_id }, postData, function(err: any, post: any){
+            PostsModel.findOneAndUpdate({ 'post_id': postData.post_id }, postData, { new: true }, function(err: any, post: any){
                 if (err) {
                     return res.status(501).send({
                         message: "Server error - please try again!!!"
@@ -122,6 +123,47 @@ class postController {
                 } else {
                     console.log('edited: ', post)
                     const resData = { message: "Update post successfully!!!", data: post}
+                    return res.status(200).json(resData);
+                }
+            });
+        } catch (error) {
+            return res.status(500).json({
+                error: true,
+                message: error.toString()
+            });
+        }
+    }
+    async onDeletePost(req: Request, res: Response){
+        var user: any = await isAuth(req, res);
+        console.log('user', user)
+        if(user.error)
+            return res.status(401).send({
+                error: true,
+                message: user.message || '401 Unauthorized'
+            });
+        let { id } = req.params;
+        if(!id)
+            return res.status(400).send({
+                message: 'Post id is required!!!!'
+            });
+        try {
+            const currentPost = await PostsModel.findOne({ 'post_id': id }).lean().exec().then((r: any) => r);
+            if(!currentPost)
+                return res.status(400).send({
+                    message: "Post not found!!!!"
+                });
+            console.log('currentPost.user: ', currentPost.user)
+            if(currentPost.user.user_id.toString() != user.data.user_id.toString())
+                return res.status(403).send({
+                    message: "You are not authorized to delete this post!!!!"
+                });
+            PostsModel.deleteOne({ 'post_id': id }, (err: any) => {
+                if (err) {
+                    return res.status(501).send({
+                        message: "Server error - please try again!!!"
+                    });
+                } else {
+                    const resData = { message: "Delete post successfully!!!", data: { post_id: id }}
                     return res.status(200).json(resData);
                 }
             });
