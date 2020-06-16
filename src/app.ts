@@ -22,12 +22,12 @@ class App {
         this.app.use('/api/v1', Routes.router)
         this.app.get("/", (req, res, next) => {
             res.send({
-                status: 'Welcome to my app'
+                message: 'Welcome to my app'
             });
         });
         this.app.use("*", (req, res, next) => {
-            res.send({
-                status: "Page not found!!!"
+            res.status(404).send({
+                message: "Page not found!!!"
             });
         });
     }

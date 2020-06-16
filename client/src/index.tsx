@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Router } from "react-router-dom";
 import { Provider } from 'react-redux'
 import App from './modules/App';
+import history from './utils/history';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store';
 const store = configureStore();
 
 ReactDOM.render(
     <Provider store={ store }>
-        <BrowserRouter>
+        <Router history={history}>
             <App />
-        </BrowserRouter>
+        </Router>
     </Provider>
 , document.getElementById('root'));
 

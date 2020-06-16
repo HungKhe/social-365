@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import "../assets/styles.scss";
 import EffectButton from '../../../components/snippets/EffectButton';
 interface LoginPage {
-    isDisabledBtn: boolean,
     prHandleSubmit: (data?: any) => void;
 }
 const LoginPage: React.FC<LoginPage> = props =>{
-    const { isDisabledBtn, prHandleSubmit } = props;
+    const { prHandleSubmit } = props;
     const [dataLogin, setDataLogin] = useState<object>({ userName: '', password: ''});
     const inputHandleChange = function(e: React.ChangeEvent<HTMLInputElement>){
         if(e.target.name === 'userName')
@@ -50,7 +49,7 @@ const LoginPage: React.FC<LoginPage> = props =>{
                             </div>
                         </div>
                         <div className="floating-label send">
-                            <EffectButton nameButton="Đăng nhập" disabled={ isDisabledBtn }/>
+                            <EffectButton nameButton="Đăng nhập" />
                         </div>
                         <div className="floating-label text">
                             <span>Bạn chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link></span>

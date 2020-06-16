@@ -13,5 +13,5 @@ db.once("open", () => {
     console.log(`> successfully opened the database to ${ dbPath }`);
 });
 export default mongoose;
-// C:\Users\tungn\Desktop\App\mongodb-win32-x86_64-2012plus-4.2.2\bin\mongod.exe --dbpath C:\Users\tungn\Desktop\App\mongodb-win32-x86_64-2012plus-4.2.2\dataDB
+// E:\Install\mongodb-win32-x86_64-2012plus-4.2.7\bin\mongod.exe --dbpath E:\Install\mongodb-win32-x86_64-2012plus-4.2.7\MongoData
 // E:\Phanmem\Hoc\mongodb-win32-x86_64-2012plus-4.2.6\bin\mongod.exe --dbpath E:\Phanmem\Hoc\mongodb-win32-x86_64-2012plus-4.2.6\MongoDB

@@ -1,7 +1,0 @@
-import React from "react";
-const Community: React.FC<{}> = props => {
-    return (
-        <h1>Home Page</h1>
-    )
-}
-export default Community;

@@ -1,12 +1,6 @@
 import jwt from 'jsonwebtoken';
-export const generateToken = (user: any, secretSignature: string, tokenLife: string) => {
+export const generateToken = (userData: object, secretSignature: string, tokenLife: string) => {
     return new Promise((resolve, reject) => {
-    // Định nghĩa những thông tin của user mà bạn muốn lưu vào token ở đây
-    const userData = {
-        _id: user.user_id,
-        name: user.user_name,
-        email: user.user_email
-    }
     // Thực hiện ký và tạo token
     jwt.sign(
         {data: userData},

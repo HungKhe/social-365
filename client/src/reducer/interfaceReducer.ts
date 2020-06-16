@@ -1,4 +1,8 @@
-import { itfLoading } from '../modules/Loading/container/types';
+import { loadingState } from '../modules/Loading/container/types';
+import { userMODInterface } from '../modules/User/redux/types';
+import { postMODInterface } from '../modules/Community/redux/types';
 export interface TypeRootReducer {
-    loading: itfLoading
+    loading: loadingState,
+    user: userMODInterface,
+    post: postMODInterface
 }

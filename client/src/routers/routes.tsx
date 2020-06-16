@@ -1,7 +1,8 @@
 import React from 'react';
-import Login from '../modules/Login/containers/Login';
-import Register from '../modules/Register/containers/Register';
-import Community from '../modules/Community/page/Community';
+import Login from '../modules/User/Login/container/Login';
+import Register from '../modules/User/Register/container/Register';
+import Community from '../modules/Community/container/Community';
+import Logout from '../modules/User/Logout/Logout';
 const routes = [
     {
         path: "/",
@@ -18,6 +19,11 @@ const routes = [
         path: '/register',
         exact: false,
         component: Register
+    },
+    {
+        path: "/logout",
+        component: Logout,
+        isPrivate: true
     },
     // {
     //     path: '/create',

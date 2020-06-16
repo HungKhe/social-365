@@ -18,7 +18,7 @@ function App() {
 			})
 		}
 	</Switch>
-	<ToastContainer limit={3} transition={Bounce} draggablePercent={60} />
+	<ToastContainer limit={3} transition={Bounce} draggablePercent={60} autoClose={2000} />
 	</div>
   );
 }

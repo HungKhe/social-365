@@ -1,7 +1,7 @@
 import React from 'react';
 interface EffectButton {
     nameButton: string;
-    disabled: boolean;
+    disabled?: boolean;
 }
 const EffectButton: React.FC<EffectButton> = ({nameButton, disabled}) => {
   return (
