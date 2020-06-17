@@ -19,10 +19,10 @@ const ConfirmModal: React.FC<ConfirmModal> = props => {
                 }
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => handleConfirm(false)}>
+                <Button variant="secondary" onClick={() => {handleConfirm(false)}}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={() => handleConfirm(true)}>
+                <Button variant="primary" onClick={() => {handleConfirm(true)}}>
                     Delete
                 </Button>
             </Modal.Footer>

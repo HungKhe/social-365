@@ -15,3 +15,4 @@ db.once("open", () => {
 export default mongoose;
 // E:\Install\mongodb-win32-x86_64-2012plus-4.2.7\bin\mongod.exe --dbpath E:\Install\mongodb-win32-x86_64-2012plus-4.2.7\MongoData
 // E:\Phanmem\Hoc\mongodb-win32-x86_64-2012plus-4.2.6\bin\mongod.exe --dbpath E:\Phanmem\Hoc\mongodb-win32-x86_64-2012plus-4.2.6\MongoDB
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOiI1ZWJlYzdhNTk3MzQyMTI2N2M0NjQwNjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInVzZXJfZW1haWwiOiJhZG1pbkBnbWFpbC5jb20ifSwiaWF0IjoxNTkyMzE2Nzg2LCJleHAiOjE1OTIzMjAzODZ9.da5744UAbtm3bN7AYlhst60ZvvURvAPHVIy9_BfSu48

@@ -26,7 +26,8 @@ const Post: React.FC<Post> = (props) => {
     const handlePost = function(e: React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
         prHandlePost({...dataPost});
-        setDataPost({...dataPost, content: '', videos: [], images: []})
+        if(!dataPost.post_id)
+            setDataPost({...dataPost, content: '', videos: [], images: []})
     }
     return(
         <div className="communityPost">

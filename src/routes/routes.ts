@@ -22,6 +22,10 @@ class Routes {
         this.router.route("/community/post")
             .post(postController.onCreateNewPost)
             .get(postController.onFetchListPost)
+            .put(postController.onUpdatePost)
+
+        this.router.route("/community/post/:id")
+            .delete(postController.onDeletePost)
     }
 }
 export default new Routes();

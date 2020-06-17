@@ -19,30 +19,42 @@ const Community: React.FC<Community> = (props) => {
     })
     const postSelector: postMODInterface = useSelector((state: TypeRootReducer) => state.post);
     const dispatch = useDispatch();
-    const onHandlePost = (dataPost: any) => {
+    const onCreatePost = (dataPost: any) => {
         console.log("dataPost: ", dataPost);
         dispatch(actions.actCreatePost(dataPost));
+    }
+    const onUpdatePost = (dataUpdate: any) => {
+        console.log("dataPost: ", dataUpdate);
+        dispatch(actions.actUpdatePost(dataUpdate));
     }
     const onLoadMorePost = () => {
         let currentPage = queryPost.page + 1;
         setQueryPost({...queryPost, page: currentPage});
+    }
+    const onDeletePost = (post_id: any) => {
+        dispatch(actions.actDeletePost(post_id));
     }
     useEffect(() => {
         dispatch(actions.actFetchListPost(queryPost));
     }, [queryPost.page])
     return(
         <>
-            <Post prHandlePost={onHandlePost}/>
+            <Post prHandlePost={onCreatePost}/>
             {
                 !postSelector.isLoading && postSelector.listPost.length === 0 ? 
                 <p className="emptyData text-center my-3">Not posts!</p>
                 :
-                <CommunityPage listPost={postSelector.listPost}/>
+                <CommunityPage listPost={postSelector.listPost} prUpdatePost={onUpdatePost} prDeletePost={onDeletePost}/>
             }
-            <LoadingLine isLoading={postSelector.isLoading} />
-            <div className={`loadMore pb-3 ${postSelector.isLoading || postSelector.totalPages <= queryPost.page ? 'd-none' : ''}`}>
-                <a onClick={onLoadMorePost} href="javascript:;">Load more posts</a>
-            </div>
+            <LoadingLine isLoading={postSelector.isLoading}/>
+            {
+                postSelector.isLoading || postSelector.totalPages <= queryPost.page ?
+                    null
+                : 
+                    <div className="loadMore pb-3">
+                        <a onClick={onLoadMorePost} href="javascript:;">Load more posts</a>
+                    </div>
+            }
         </>
     )
 }
